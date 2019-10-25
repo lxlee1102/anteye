@@ -16,7 +16,7 @@ WORKDIR ${PROJ_PATH}
 RUN go get ./... && \
     ./control build  && \
     go build ./vendor/github.com/lxlee1102/cfgmaker && \
-    cp -f falcon-anteye $FALCON_DIR/task/bin/falcon-anteye && \
+    cp -f falcon-anteye $FALCON_DIR/anteye/bin/falcon-anteye && \
     cp -f cfgmaker $FALCON_DIR/anteye/cfgmaker && \
     cp -f cmdocker/anteye.tpl $FALCON_DIR/anteye/ && \
     cp -f cmdocker/falcon-entry.sh $FALCON_DIR/ && \

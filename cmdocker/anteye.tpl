@@ -11,7 +11,7 @@
     },
     "sms" : {
         "enable": false,
-        "url" : "%%SMS_API%%"
+        "url" : "%%SMS_API%%",
         "receivers" : "%%SMS_RECEIVERS%%"
     },
     "callback" : {
