@@ -1,0 +1,46 @@
+version: '3'
+
+#
+# 1. added myself to open-falcon's docker-compose.yml
+#
+# notes:
+#    export IMAGE_URL=harbor.cloudminds.com/vbn/falcon-modules/
+#    docker-compose up -d
+#    wget --no-check-certificate --http-user=vbn --http-passwd=cmvbn@2016 https://release.slink.datadn.net/download/openfalcon/falcon-docker-db-init.sh && sh falcon-docker-db-init.sh Pwd123456 && rm -f falcon-docker-db-init.sh
+#    docker-compose restart
+
+
+services:
+  falcon-anteye:
+    container_name: falcon-anteye
+    image: ${IMAGE_URL}falcon-anteye:dt3.1.0.1
+    restart: always
+    depends_on:
+      - falcon-logs
+      - falcon-mail
+    links:
+      - falcon-logs:logserver.falcon
+    environment:
+      SYSLOG_SERVER_ADDR: logserver.falcon
+      SYSLOG_SERVER_PORT: 514
+      SYSLOG_SERVER_TCP: tcp
+      MAIL_API: http://mail.falcon:4000/sender/mail
+      MAIL_RECEIVERS: noc.alarm@cloudminds.com
+      SMS_API:
+      SMS_RECEIVERS:
+      CALLBACK_API:
+      MONITOR_CLUSTER: '
+        "transfer,falcon-transfer:6060/health",
+        "graph,falcon-graph-01:6071/health",
+        "graph,falcon-graph-02:6071/health",
+        "graph,falcon-graph-03:6071/health",
+        "graph,falcon-graph-04:6071/health",
+        "task,falcon-task:8010/health",
+        "nodata,falcon-nodata:6090/health"'
+    volumes:
+#      - /etc/localtime:/etc/localtime
+      - ${PWD}/open-falcon/anteye/config:/open-falcon/anteye/config
+      - ${PWD}/open-falcon/anteye/logs:/open-falcon/logs
+    expose:
+      - "8001"
+
