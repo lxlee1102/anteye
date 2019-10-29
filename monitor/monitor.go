@@ -17,7 +17,7 @@ import (
 	nhttpclient "github.com/niean/gotools/http/httpclient"
 	ntime "github.com/niean/gotools/time"
 
-	"github.com/niean/anteye/g"
+	"github.com/lxlee1102/anteye/g"
 )
 
 var (
@@ -62,7 +62,12 @@ func alarmJudge() {
 		cfg := g.Config()
 		// mail
 		if cfg.Mail.Enable {
-			hn, _ := os.Hostname()
+			var hn string = ""
+			if cfg.DeployEnv != "" {
+				hn = cfg.DeployEnv
+			} else {
+				hn, _ = os.Hostname()
+			}
 			mailContent := formAlarmMailContent(cfg.Mail.Receivers, "AntEye.Alarm.From.["+hn+"]",
 				content.String(), "AntEye")
 			err := sendMail(cfg.Mail.Url, mailContent)

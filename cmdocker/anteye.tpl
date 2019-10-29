@@ -1,5 +1,6 @@
 {
     "debug": false,
+    "deploy_env": "%%DEPLOY_ENV%%",
     "http": {
         "enable": true,
         "listen": "0.0.0.0:8001"

@@ -2,9 +2,10 @@ package g
 
 import (
 	"encoding/json"
-	"github.com/toolkits/file"
 	"log"
 	"sync"
+
+	"github.com/toolkits/file"
 )
 
 type HttpConfig struct {
@@ -34,12 +35,13 @@ type MonitorConfig struct {
 }
 
 type GlobalConfig struct {
-	Debug    bool            `json:"debug"`
-	Http     *HttpConfig     `json:"http"`
-	Mail     *MailConfig     `json:"mail"`
-	Sms      *SmsConfig      `json:"sms"`
-	Callback *CallbackConfig `json:"callback"`
-	Monitor  *MonitorConfig  `json:"monitor"`
+	Debug     bool            `json:"debug"`
+	DeployEnv string          `json:"deploy_env"`
+	Http      *HttpConfig     `json:"http"`
+	Mail      *MailConfig     `json:"mail"`
+	Sms       *SmsConfig      `json:"sms"`
+	Callback  *CallbackConfig `json:"callback"`
+	Monitor   *MonitorConfig  `json:"monitor"`
 }
 
 var (

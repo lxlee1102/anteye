@@ -26,6 +26,7 @@ services:
       SYSLOG_SERVER_TCP: tcp
       MAIL_API: http://mail.falcon:4000/sender/mail
       MAIL_RECEIVERS: noc.alarm@cloudminds.com
+      DEPLOY_ENV:
       SMS_API:
       SMS_RECEIVERS:
       CALLBACK_API:
@@ -36,7 +37,14 @@ services:
         "graph,falcon-graph-03:6071/health",
         "graph,falcon-graph-04:6071/health",
         "task,falcon-task:8010/health",
-        "nodata,falcon-nodata:6090/health"'
+        "nodata,falcon-nodata:6090/health",
+	"aggregator,falcon-aggregator:6055/health",
+	"hbs,falcon-hbs:6031/health",
+	"judge,falcon-judge-01:6081/health",
+	"judge,falcon-judge-02:6081/health",
+	"judge,falcon-judge-03:6081/health",
+	"judge,falcon-judge-04:6081/health",
+	"mail,falcon-mail:4000/health"'
     volumes:
 #      - /etc/localtime:/etc/localtime
       - ${PWD}/open-falcon/anteye/config:/open-falcon/anteye/config

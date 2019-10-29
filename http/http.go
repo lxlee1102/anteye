@@ -5,7 +5,7 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/niean/anteye/g"
+	"github.com/lxlee1102/anteye/g"
 )
 
 type Dto struct {
